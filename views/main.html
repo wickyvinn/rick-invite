@@ -3,18 +3,29 @@
 
 <head>
   <link href="../css/main.css" rel="stylesheet">
+  <script src="../js/bounce.js"></script>
 </head>
 
 <body>
 
-<img src="../img/moto.jpg">
+
+
+<img class="animation-target" src="../img/moto.jpg">
 
 </body>
 
 <script>
 
+var bounce = new Bounce();
 
+bounce.translate({
+  from: { x: 0, y: 0 },
+  to: { x: 300, y: 0 },
+  duration: 12000,
+  stiffness: 4
+}).applyTo(document.querySelectorAll(".animation-target"));
 
 </script>
+
 
 </html>

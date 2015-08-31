@@ -6,6 +6,7 @@ app.use(express.static(__dirname + '/public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
+
 app.get('/', function(req, res) {
   res.render('main.html');
 });
