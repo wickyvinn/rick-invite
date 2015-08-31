@@ -3,27 +3,58 @@
 
 <head>
   <link href="../css/main.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="../js/bounce.js"></script>
 </head>
 
 <body>
 
 
+<div class="intro">You are cordially invited to</div>
 
-<img class="animation-target" src="../img/moto.jpg">
+<div class="an-evening" style="margin-top: 30px">an evening of</div>
+
+<div class="having" style="margin-top: 60px">having it all.</div>
+<img class="moto animation-target" style="display:none;" src="../img/moto.jpg">
+
+<div></div>
 
 </body>
 
 <script>
 
-var bounce = new Bounce();
+introFades()
 
-bounce.translate({
-  from: { x: 0, y: 0 },
-  to: { x: 300, y: 0 },
-  duration: 12000,
-  stiffness: 4
-}).applyTo(document.querySelectorAll(".animation-target"));
+function introFades() {
+  $(".intro").fadeIn(1000, function() { 
+    $(".intro").fadeOut(1000, function () {
+      $(".an-evening").fadeIn(1000, function() { 
+        $(".an-evening").fadeOut(1000, function () {
+          $(".having").fadeIn(1000, function () {
+            enterMoto()
+          });
+        });    
+      });
+    }); 
+  });
+}
+
+function enterMoto() {
+  $(".moto").show()
+  var bounce = new Bounce();
+  bounce.translate({
+    from: { x: 0, y: 0 },
+    to: { x: 300, y: 0 },
+    duration: 12000,
+    stiffness: 1,
+    bounces: 3
+  })
+  .applyTo(document.querySelectorAll(".moto"));
+}
+
+
+
 
 </script>
 

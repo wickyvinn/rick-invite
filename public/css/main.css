@@ -1,0 +1,10 @@
+body {
+
+}
+
+.intro, .an-evening, .having {
+  display: none;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 50px;
+  text-align: center;
+}
