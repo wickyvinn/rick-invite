@@ -3,9 +3,13 @@ body {
   font-family: 'Patrick Hand SC', cursive;
 }
 
+.moto {
+  position: relative;
+}
+
 .intro, .an-evening, .having, .thursday, .sept3rd {
   display: none;
-  font-family: 'Permanent Marker', cursive;
+  font-family: 'Patrick Hand SC', cursive;
   font-size: 50px;
   text-align: center;
 }
@@ -31,11 +35,11 @@ body {
 
 .backToMenu {
   position: fixed;
-  top: 400px;
+  top: 500px;
   right: 46%;
 }
 
-.choice-response, .ramenChoice, .ethiopianChoice, .bookChoice, .bagChoice, .great-choice {
+.choice-response, .ramenChoice, .ethiopianChoice, .bookChoice, .bagChoice, .great-choice, .rundown {
   display: none;
   font-size: 30px;
   text-align: center;

@@ -18,11 +18,11 @@
 <div class="thursday">This Thursday.</div>
 
 <img class="moto" style="display:none;" src="../img/moto.jpg">
-
-<div class="dinner">There will be dinner.</div>
-<div class="soccer">Then a show.</div>
-<div class="drinks">Then even after show drinks!</div>
-
+<div class="rundown">
+  <div class="dinner">There will be dinner.</div>
+  <div class="soccer">Then a show.</div>
+  <div class="drinks">Then even after show drinks!</div>
+</div>
 <div class="choicesPrompt" style="display:none;">But for dinner, we've got some options.</div>
 <div class="choices">
   <img class="choice ramen" src="../img/ramen.jpg">
@@ -219,10 +219,6 @@ function proceedOptions() {
   });
 }
 
-function enterMoto2(){
-  $('.moto').animate("left","+=50px", 1000)
-}
-
 function enterMoto() {
   $(".moto").show()
 
@@ -242,7 +238,6 @@ function enterMoto() {
     delay: 3000
   })
   .applyTo(document.querySelectorAll(".moto"), options = { onComplete: proceedOptions })
-  .remove()
 }
 
 function clickChoice(className) {
