@@ -17,30 +17,107 @@
 
 <div class="thursday">This Thursday.</div>
 
-<img class="moto animation-target" style="display:none;" src="../img/moto.jpg">
-<div class="choicesPrompt" style="display:none;">We've got some choices.</div>
+<img class="moto" style="display:none;" src="../img/moto.jpg">
+
+<div class="dinner">There will be dinner.</div>
+<div class="soccer">Then a show.</div>
+<div class="drinks">Then even after show drinks!</div>
+
+<div class="choicesPrompt" style="display:none;">But for dinner, we've got some options.</div>
 <div class="choices">
-  <img class="choice ramen shrink-choice" src="../img/ramen.jpg">
+  <img class="choice ramen" src="../img/ramen.jpg">
   <img class="choice piano" src= "../img/piano.jpg">
-  <img class="choice book shrink-choice" src= "../img/book.gif">
-  <img class="choice bag shrink-choice" src= "../img/bag.jpg">
+  <img class="choice book" src= "../img/book.gif">
+  <img class="choice bag" src= "../img/bag.jpg">
 
 </div>
+
+<div class="choice-response">
+  <div class="singleChoice ramenChoice">Ramen!
+    <li><a href="http://www.yelp.com/biz/izakaya-kou-san-francisco">Izakaya Kou</a></li>
+    <li><a href="http://www.yelp.com/biz/izakaya-sozai-san-francisco">Izakaya Sozai</a></li>
+    <li><a href="http://www.yelp.com/biz/iza-ramen-san-francisco">Iza Ramen</a></li>
+  </div>
+  <div class="singleChoice ethiopianChoice"><a href="http://shebapianolounge.com/">Sheba Piano Lounge</a>
+    <li>ethiopian food</li>
+    <li>jazzy af live band</li>
+    <li>close quarters, perfect for footsie, accidental or otherwise</li>
+  </div>
+  <div class="singleChoice bookChoice"><a href="http://www.thesocialstudysf.com/#home-2-section">The Social Study</a>
+    <li>get crazy on tacos and sliders</li>
+    <li>stellar cocktails</li>
+    <li>as cute and bookish as carey mulligan in "an education"</li>
+  </div>
+  <div class="singleChoice bagChoice">Take 'Er To-Go</a>
+    <li>dealer's choice on food</li>
+    <li>obscene poster making on kitchen floor</li>
+    <li>lotsa of mandatory lounging to icejjfish soundtrack</li>
+  </div>
+  <div class="yes"><img src="../img/yes.jpg"></div>
+  <div class="yes">I want that.</div>
+  <div class="backToMenu" style="padding-top: 40px"><< back >></div>
+</div>
+  
+<div class="great-choice" style="font-size: 70px">Great choice! I couldn't have decided any better.
+<br> Looking forward to Thursday!! 
+<br>xoxo, vicky </div>
 
 </body>
 
 <script>
 
-proceedOptions()
+var picked; 
+
+$('.yes').each(function() {
+    var elem = $(this);
+    setInterval(function() {
+        if (elem.css('display') == 'none') {
+            elem.fadeIn(1000);
+        } else {
+            elem.fadeOut(1000);
+        }    
+    }, 1);
+});
+
+
+$('.choice').hover(function () { $(this).css("width", "15%") }, 
+  function() { $(this).css("width", "10%") });
+
+$('.choice').click(function () {
+  clickChoice($(this).attr("class"))
+});
+
+$('.backToMenu').hover(function () { $(this).css("color", "pink") }, 
+  function() { $(this).css("color", "black") });
+
+$('.yes').hover(
+  function () { 
+    $(this).css("color", "pink") 
+  }, 
+  function() { 
+    $(this).css("color", "black") 
+  });
+
+$('.yes').click(function () { 
+  gotPick()
+});
+
+
+$('.backToMenu').click(function() {
+  backToMenu();
+});
+
+introFade()
 
 function introFade() {
-  $(".intro").fadeIn(500, function() { 
-    $(".intro").fadeOut(500, function () {
-      $(".an-evening").fadeIn(500, function() { 
-        $(".an-evening").fadeOut(500, function () {
-          $(".having").fadeIn(500, function () {
-            $('.having').fadeOut(500, function () {
-              $('.thursday').fadeIn(500, function() {
+  
+  $(".intro").fadeIn(750, function() { 
+    $(".intro").fadeOut(750, function () {
+      $(".an-evening").fadeIn(750, function() { 
+        $(".an-evening").fadeOut(750, function () {
+          $(".having").fadeIn(750, function () {
+            $('.having').fadeOut(750, function () {
+              $('.thursday').fadeIn(750, function() {
                 enterMoto()  
               });
             });
@@ -142,8 +219,13 @@ function proceedOptions() {
   });
 }
 
+function enterMoto2(){
+  $('.moto').animate("left","+=50px", 1000)
+}
+
 function enterMoto() {
   $(".moto").show()
+
   var bounce = new Bounce();
   bounce.translate({
     from: { x: 0, y: 0 },
@@ -160,9 +242,41 @@ function enterMoto() {
     delay: 3000
   })
   .applyTo(document.querySelectorAll(".moto"), options = { onComplete: proceedOptions })
-  .remove
+  .remove()
 }
 
+function clickChoice(className) {
+  $('.choicesPrompt').fadeOut(100);
+  $('.choices').fadeOut(100);
+  var clases = className.split(" ");
+  picked = clases[1]
+  if (clases.indexOf('ramen')>-1) {
+    $('.ramenChoice').fadeIn(1000);
+  } 
+  if (clases.indexOf('piano')>-1) {
+    $('.ethiopianChoice').fadeIn(1000);
+  }  
+  if (clases.indexOf('book')>-1) {
+    $('.bookChoice').fadeIn(1000);
+  }  
+  if (clases.indexOf('bag')>-1) {
+    $('.bagChoice').fadeIn(1000)
+  }
+  $('.choice-response').fadeIn(1000);
+}
+
+function backToMenu() {
+  $('.choice-response').hide();
+  $('.singleChoice').hide();
+  $('.choicesPrompt').fadeIn(300);
+  $('.choices').fadeIn(300);
+}
+
+function gotPick() {
+  $('.choice-response').hide();
+  $('.singleChoice').hide();
+  $('.great-choice').fadeIn(200);
+}
 
 </script>
 
