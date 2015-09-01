@@ -11,17 +11,21 @@
 <body>
 <div class="intro">You are cordially invited to</div>
 
-<div class="an-evening" style="margin-top: 30px">an evening of</div>
+<div class="an-evening" style="padding-top: 30px">an evening of</div>
 
-<div class="having" style="margin-top: 60px">having it all.</div>
+<div class="having" style="padding-top: 60px">having it all.</div>
 
-<div class="thursday">This Thursday.</div>
+<div class="thursday" style="padding-top: 100px">This Thursday.</div>
 
 <img class="moto" style="display:none;" src="../img/moto.jpg">
 <div class="rundown">
-  <div class="dinner">There will be dinner.</div>
-  <div class="soccer">Then a show.</div>
-  <div class="drinks">Then even after show drinks!</div>
+  <div class="dinner" style="display:none;">There will be dinner.</div>
+  <div class="dinner" style="display:none;"><img src="../img/eating.gif"></div>
+  <div class="soccer" style="display:none;">There will be soccer.</div>
+  <div class="soccer" style="display:none;"><img src="../img/soccer.gif"></div>
+  <div class="drinks" style="display:none;">There will be drinks & mad chilling.</div>
+  <div class="drinks" style="display:none;"><img src="../img/drinks.gif"></div>
+
 </div>
 <div class="choicesPrompt" style="display:none;">But for dinner, we've got some options.</div>
 <div class="choices">
@@ -29,6 +33,7 @@
   <img class="choice piano" src= "../img/piano.jpg">
   <img class="choice book" src= "../img/book.gif">
   <img class="choice bag" src= "../img/bag.jpg">
+  <img class="choice scott" src= "../img/scott.png">
 
 </div>
 
@@ -53,7 +58,12 @@
     <li>obscene poster making on kitchen floor</li>
     <li>lotsa of mandatory lounging to icejjfish soundtrack</li>
   </div>
-  <div class="yes"><img src="../img/yes.jpg"></div>
+  <div class="singleChoice scottChoice">Scott & Co.</a>
+    <li>post-venue scouting, scott wants to treat some peeps to dinner</li>
+    <li>you come with us to scout venue in the <a href="https://www.google.com/search?q=Presidio+Dance+Center&oq=Presidio+Dance+Center&aqs=chrome..69i57.505j0j7&sourceid=chrome&es_sm=91&ie=UTF-8#q=Presidio+Dance+Center&rflfq=1&rlha=0&tbm=lcl">presidio</a> or meet at the restaurant (tbd)</li>
+    <li>delightful company and delicious eats</li>
+  </div>
+  <div class="yes" style="padding-top: 60px"><img src="../img/yes.jpg"></div>
   <div class="yes">I want that.</div>
   <div class="backToMenu" style="padding-top: 40px"><< back >></div>
 </div>
@@ -111,13 +121,14 @@ introFade()
 
 function introFade() {
   
-  $(".intro").fadeIn(750, function() { 
+  $(".intro").delay( 800 ).fadeIn(750, function() { 
     $(".intro").fadeOut(750, function () {
       $(".an-evening").fadeIn(750, function() { 
         $(".an-evening").fadeOut(750, function () {
           $(".having").fadeIn(750, function () {
             $('.having').fadeOut(750, function () {
               $('.thursday').fadeIn(750, function() {
+                intro2()
                 enterMoto()  
               });
             });
@@ -126,6 +137,22 @@ function introFade() {
       });
     }); 
   });
+}
+
+function intro2() {
+  $(".rundown").show();
+  $(".dinner").fadeIn(1750, function() { 
+    $(".dinner").fadeOut(1500, function () {
+      $(".soccer").fadeIn(1500, function() { 
+        $(".soccer").fadeOut(1500, function () {
+          $(".drinks").fadeIn(1500, function () {
+            $('.drinks').fadeOut(1500)
+          });
+        });    
+      });
+    }); 
+  });
+
 }
 
 function skewChoice() {
@@ -162,6 +189,32 @@ function shakeChoice() {
   })
   .applyTo(document.querySelectorAll(".book"), options = { loop: true})
 }
+
+function liftChoice2() {
+  var bounce = new Bounce();
+  bounce.translate({
+    from: { x:0, y: 0},
+    to: { x:0, y: 20},
+    duration: 500,
+    bounce: 1
+  })
+  .translate({
+    from: { x:0, y: 0},
+    to: { x:0, y: -20},
+    duration: 500,
+    delay: 300,
+    bounce: 1
+  })
+  .translate({
+    from: { x:0 , y: 0},
+    to: { x:0, y: 0},
+    duration: 500,
+    delay: 300,
+    bounce: 1
+  })
+  .applyTo(document.querySelectorAll(".scott"), options = { loop: true})
+}
+
 
 function liftChoice() {
   var bounce = new Bounce();
@@ -206,14 +259,15 @@ function rotateChoice() {
 }
 
 function proceedOptions() {
-  $('.thursday').hide();
+  $('.thursday').hide(200);
   $('.moto').hide();
-  $('.choicesPrompt').fadeIn(1000, function () {
+  $('.choicesPrompt').fadeIn(2000, function () {
     $('.choice').fadeIn(1400, function() {
       shakeChoice();
       rotateChoice();
       liftChoice();
       skewChoice();
+      liftChoice2();
     });
 
   });
@@ -256,6 +310,9 @@ function clickChoice(className) {
   }  
   if (clases.indexOf('bag')>-1) {
     $('.bagChoice').fadeIn(1000)
+  }
+  if (clases.indexOf('scott')>-1) {
+    $('.scottChoice').fadeIn(1000)
   }
   $('.choice-response').fadeIn(1000);
 }
