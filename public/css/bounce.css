@@ -1,8 +1,8 @@
 
 
 .animation-target {
-  -webkit-animation: animation 1000ms linear both;
-  animation: animation 1000ms linear both;
+  -webkit-animation: animation 50ms linear both;
+  animation: animation 50ms linear both;
 }
 
 /* Generated with Bounce.js. Edit at http://goo.gl/sswYQ9 */

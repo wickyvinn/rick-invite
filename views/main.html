@@ -3,40 +3,142 @@
 
 <head>
   <link href="../css/main.css" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Permanent+Marker' rel='stylesheet' type='text/css'>
   <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="../js/bounce.js"></script>
 </head>
 
 <body>
-
-
 <div class="intro">You are cordially invited to</div>
 
 <div class="an-evening" style="margin-top: 30px">an evening of</div>
 
 <div class="having" style="margin-top: 60px">having it all.</div>
-<img class="moto animation-target" style="display:none;" src="../img/moto.jpg">
 
-<div></div>
+<div class="thursday">This Thursday.</div>
+
+<img class="moto animation-target" style="display:none;" src="../img/moto.jpg">
+<div class="choicesPrompt" style="display:none;">We've got some choices.</div>
+<div class="choices">
+  <img class="choice ramen shrink-choice" src="../img/ramen.jpg">
+  <img class="choice piano" src= "../img/piano.jpg">
+  <img class="choice book shrink-choice" src= "../img/book.gif">
+  <img class="choice bag shrink-choice" src= "../img/bag.jpg">
+
+</div>
 
 </body>
 
 <script>
 
-introFades()
+proceedOptions()
 
-function introFades() {
-  $(".intro").fadeIn(1000, function() { 
-    $(".intro").fadeOut(1000, function () {
-      $(".an-evening").fadeIn(1000, function() { 
-        $(".an-evening").fadeOut(1000, function () {
-          $(".having").fadeIn(1000, function () {
-            enterMoto()
+function introFade() {
+  $(".intro").fadeIn(500, function() { 
+    $(".intro").fadeOut(500, function () {
+      $(".an-evening").fadeIn(500, function() { 
+        $(".an-evening").fadeOut(500, function () {
+          $(".having").fadeIn(500, function () {
+            $('.having').fadeOut(500, function () {
+              $('.thursday').fadeIn(500, function() {
+                enterMoto()  
+              });
+            });
           });
         });    
       });
     }); 
+  });
+}
+
+function skewChoice() {
+  var bounce = new Bounce();
+  bounce.skew({
+    from: { x: 0, y: 0 },
+    to: { x: 20, y: 0 },
+    delay: 1000
+  })
+  .applyTo(document.querySelectorAll(".bag"), options = { loop: true})
+
+}
+function shakeChoice() {
+  var bounce = new Bounce();
+  bounce.translate({
+    from: { x:0, y: 0},
+    to: { x:20, y: 0},
+    duration: 1000,
+    bounce: 1
+  })
+  .translate({
+    from: { x:0, y: 0},
+    to: { x:-40, y: 0},
+    duration: 1000,
+    delay: 100,
+    bounce: 1
+  })
+  .translate({
+    from: { x:0 , y: 0},
+    to: { x:20, y: 0},
+    duration: 1000,
+    delay: 100,
+    bounce: 1
+  })
+  .applyTo(document.querySelectorAll(".book"), options = { loop: true})
+}
+
+function liftChoice() {
+  var bounce = new Bounce();
+  bounce.translate({
+    from: { x:0, y: 0},
+    to: { x:0, y: 20},
+    duration: 600,
+    bounce: 1
+  })
+  .translate({
+    from: { x:0, y: 0},
+    to: { x:0, y: -20},
+    duration: 600,
+    delay: 100,
+    bounce: 1
+  })
+  .translate({
+    from: { x:0 , y: 0},
+    to: { x:0, y: 0},
+    duration: 600,
+    delay: 100,
+    bounce: 1
+  })
+  .applyTo(document.querySelectorAll(".piano"), options = { loop: true})
+}
+  
+function rotateChoice() {
+  var bounce = new Bounce();
+  bounce.rotate({
+    from: 0,
+    to: -45,
+    duration: 1000
+  })
+  .rotate({
+    from: 0,
+    to: 45,
+    duration: 1000,
+    delay: 1000
+  })
+  .applyTo(document.querySelectorAll(".ramen"), options = { loop: true})
+
+}
+
+function proceedOptions() {
+  $('.thursday').hide();
+  $('.moto').hide();
+  $('.choicesPrompt').fadeIn(1000, function () {
+    $('.choice').fadeIn(1400, function() {
+      shakeChoice();
+      rotateChoice();
+      liftChoice();
+      skewChoice();
+    });
+
   });
 }
 
@@ -45,15 +147,21 @@ function enterMoto() {
   var bounce = new Bounce();
   bounce.translate({
     from: { x: 0, y: 0 },
-    to: { x: 300, y: 0 },
-    duration: 12000,
+    to: { x: 500, y: 0 },
+    duration: 6000,
     stiffness: 1,
-    bounces: 3
+    bounce:1
   })
-  .applyTo(document.querySelectorAll(".moto"));
+  .translate({
+    from: { x: 0, y: 0 },
+    to: { x: 1000, y: 0 },
+    duration: 6000,
+    stiffness: 1, 
+    delay: 3000
+  })
+  .applyTo(document.querySelectorAll(".moto"), options = { onComplete: proceedOptions })
+  .remove
 }
-
-
 
 
 </script>
